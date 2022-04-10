@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "609479387254",
+    "project_id": "funny-papers",
+    "storage_bucket": "funny-papers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609479387254:android:5a2f3c919482e13f5a5757",
+        "android_client_info": {
+          "package_name": "com.example.funny_papers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609479387254-3ng9cn5h99vr5183sfale08qnjkh1s7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCzckZa1u-VZs_FZ3HbdmY422sFx3AGFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609479387254-3ng9cn5h99vr5183sfale08qnjkh1s7e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
