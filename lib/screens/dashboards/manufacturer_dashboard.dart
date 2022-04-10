@@ -19,18 +19,29 @@ class _ManufacturerDashboardState extends State<ManufacturerDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFFF1E6),
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text('MEDICATOR'),
+        automaticallyImplyLeading: false,
+        backgroundColor: const Color(0xFFFFF1E6),
+        title: const Text(
+          'MEDICATOR',
+          style: TextStyle(color: Colors.black),
+        ),
         actions: [
           TextButton(
             onPressed: () {},
-            child: Text('Create Record'),
+            child: const Text(
+              'Create Record',
+              style: TextStyle(color: Colors.black),
+            ),
           ),
           TextButton(
             onPressed: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => ManufacturerHistory())),
-            child: Text('My History'),
+            child: const Text(
+              'My History',
+              style: TextStyle(color: Colors.black),
+            ),
           ),
           TextButton(
             onPressed: () async {
@@ -44,14 +55,17 @@ class _ManufacturerDashboardState extends State<ManufacturerDashboard> {
                 return null;
               }
             },
-            child: Text('Logout'),
+            child: Text(
+              'Logout',
+              style: TextStyle(color: Colors.black),
+            ),
           ),
         ],
       ),
       body: FutureBuilder(
         future: http.post(
             Uri.parse(
-                "https://063e-2401-4900-415f-78b-4187-47b8-923b-d79e.ngrok.io/backend/getprofilemanu"),
+                "http://5f9b-2405-201-4022-e94c-d95-5757-635-a66d.ngrok.io/backend/getprofilemanu"),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },

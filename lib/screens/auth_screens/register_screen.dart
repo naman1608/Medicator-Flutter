@@ -70,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen>
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: 40,
+                height: 50,
               ),
               const Text(
                 'Welcome Back',
@@ -145,38 +145,13 @@ class _RegisterScreenState extends State<RegisterScreen>
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              SizedBox(
-                height: 30,
+              const SizedBox(
+                height: 20,
               ),
               const Text(
                 'use your email to register',
                 style: TextStyle(fontSize: 18),
               ),
-              // Padding(
-              //   padding:
-              //       const EdgeInsets.symmetric(horizontal: 80, vertical: 5),
-              //   child: Container(
-              //     padding: const EdgeInsets.all(0),
-              //     decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(5),
-              //         color: Color(0xFFBBBBBB)),
-              //     child: TabBar(
-              //       indicatorPadding: const EdgeInsets.all(0),
-              //       indicator: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(5),
-              //         color: Colors.black,
-              //       ),
-              //       labelColor: Colors.white,
-              //       unselectedLabelColor: Colors.black,
-              //       controller: _tabController,
-              //       tabs: const <Widget>[
-              //         LeaderboardTabBar(
-              //             paddingConstant: 18, text: 'Manufacturers'),
-              //         LeaderboardTabBar(paddingConstant: 18, text: 'Retailers'),
-              //       ],
-              //     ),
-              //   ),
-              // ),
               Container(
                 padding: const EdgeInsets.symmetric(
                   vertical: 25,
@@ -187,7 +162,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                   child: Column(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(5),
+                        padding: EdgeInsets.symmetric(vertical: 5),
                         height: 60,
                         child: TextFormField(
                           keyboardType: TextInputType.name,
@@ -214,7 +189,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(5),
+                        padding: EdgeInsets.symmetric(vertical: 5),
                         height: 60,
                         child: TextFormField(
                           keyboardType: TextInputType.name,
@@ -241,7 +216,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(5),
+                        padding: EdgeInsets.symmetric(vertical: 5),
                         height: 60,
                         child: TextFormField(
                           keyboardType: TextInputType.name,
@@ -267,7 +242,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(5),
+                        padding: EdgeInsets.symmetric(vertical: 5),
                         height: 60,
                         child: TextFormField(
                           keyboardType: TextInputType.name,
@@ -293,7 +268,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                         ),
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 20,
                       ),
                       Container(
                         width: double.infinity,
@@ -321,7 +296,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                   print(FirebaseAuth.instance.currentUser!.uid);
                                   final response = await http.post(
                                       Uri.parse(
-                                          "https://063e-2401-4900-415f-78b-4187-47b8-923b-d79e.ngrok.io/backend/saveprofilemanu"),
+                                          "http://5f9b-2405-201-4022-e94c-d95-5757-635-a66d.ngrok.io/backend/saveprofilemanu"),
                                       headers: <String, String>{
                                         'Content-Type':
                                             'application/json; charset=UTF-8',
@@ -349,7 +324,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                   print(FirebaseAuth.instance.currentUser!.uid);
                                   final response = await http.post(
                                       Uri.parse(
-                                          "https://063e-2401-4900-415f-78b-4187-47b8-923b-d79e.ngrok.io/backend/saveprofilehosp"),
+                                          "http://5f9b-2405-201-4022-e94c-d95-5757-635-a66d.ngrok.io/backend/saveprofilehosp"),
                                       headers: <String, String>{
                                         'Content-Type':
                                             'application/json; charset=UTF-8',
@@ -380,7 +355,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                             child: Text(
                               'Sign Up',
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -392,8 +367,8 @@ class _RegisterScreenState extends State<RegisterScreen>
                               borderRadius: BorderRadius.circular(5),
                               side: BorderSide(color: Colors.black, width: 1.5),
                             )),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Color(0xFFFFFFFF)),
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.black),
                           ),
                         ),
                       ),

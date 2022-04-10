@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 const Color primary = Color(0xFFC6292B);
 const Color secondary = Color(0xFF24292B);
 
+String API = 
 const textInputDecoration = InputDecoration(
   hintMaxLines: 1,
   hintStyle: TextStyle(color: Colors.black, fontSize: 15),

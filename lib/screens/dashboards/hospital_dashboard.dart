@@ -19,17 +19,30 @@ class _HospitalDashboardState extends State<HospitalDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        title: const Text('MEDICATOR'),
+        title: const Text(
+          'MEDICATOR',
+          style: TextStyle(color: Colors.black),
+        ),
         actions: [
           TextButton(
             onPressed: () {},
-            child: const Text('Scan Vaccine'),
+            child: const Text(
+              'Scan Product',
+              style: TextStyle(color: Colors.black),
+            ),
           ),
-          TextButton(
-            onPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => HospitalHistory())),
-            child: const Text('My History'),
+          Container(
+            color: Colors.white,
+            child: TextButton(
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HospitalHistory())),
+              child: const Text(
+                'My History',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
           ),
           TextButton(
             onPressed: () async {
@@ -43,14 +56,17 @@ class _HospitalDashboardState extends State<HospitalDashboard> {
                 return null;
               }
             },
-            child: const Text('Logout'),
+            child: const Text(
+              'Logout',
+              style: TextStyle(color: Colors.black),
+            ),
           ),
         ],
       ),
       body: FutureBuilder(
         future: http.post(
             Uri.parse(
-                "https://063e-2401-4900-415f-78b-4187-47b8-923b-d79e.ngrok.io/backend/getprofilehosp"),
+                "http://5f9b-2405-201-4022-e94c-d95-5757-635-a66d.ngrok.io/backend/getprofilehosp"),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },

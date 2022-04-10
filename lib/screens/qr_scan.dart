@@ -40,10 +40,11 @@ class _QRScanState extends State<QRScan> {
   void readQr() async {
     if (result != null) {
       controller!.stopCamera();
+      print('RESULT');
       print(result!.code);
       final response = await http.post(
           Uri.parse(
-              "https://063e-2401-4900-415f-78b-4187-47b8-923b-d79e.ngrok.io/backend/public"),
+              "http://5f9b-2405-201-4022-e94c-d95-5757-635-a66d.ngrok.io/backend/public"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -52,10 +53,6 @@ class _QRScanState extends State<QRScan> {
           }));
       List<dynamic> data = jsonDecode(response.body);
       controller!.dispose();
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => KnowYourVaccine(data: data)),
-          (route) => false);
     }
   }
 

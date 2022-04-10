@@ -25,6 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -52,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: 40,
+                height: 50,
               ),
               const Text(
                 'New Here?',
@@ -127,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(
-              height: 30,
+              height: 20,
             ),
             const Text(
               'use your email to login',
@@ -146,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(5),
+                      padding: EdgeInsets.symmetric(vertical: 5),
                       height: 60,
                       child: TextFormField(
                         keyboardType: TextInputType.text,
@@ -170,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(5),
+                      padding: EdgeInsets.symmetric(vertical: 5),
                       height: 60,
                       child: TextFormField(
                         keyboardType: TextInputType.text,
@@ -193,13 +194,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     Container(
                       width: double.infinity,
                       height: 47,
                       child: ElevatedButton(
                         onPressed: () async {
+                          print('PRESSED');
                           if (_formKey.currentState!.validate()) {
                             setState(() {
                               loading = true;
@@ -207,6 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             dynamic result =
                                 await signInCompanyWithEmailandPassword(
                                     email, password);
+                            print(result);
                             if (result == null) {
                               setState(() {
                                 error = 'sign in failed';
@@ -227,7 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Text(
                             'Login',
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500),
                           ),
@@ -240,8 +243,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(5),
                             side: BorderSide(color: Colors.black, width: 1.5),
                           )),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Color(0xFFFFFFFF)),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.black),
                         ),
                       ),
                     ),
