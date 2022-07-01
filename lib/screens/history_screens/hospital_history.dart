@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:funny_papers/main.dart';
 import 'package:funny_papers/models/medicine.dart';
+import 'package:funny_papers/shared/constants.dart';
 import 'package:http/http.dart' as http;
 
 class HospitalHistory extends StatefulWidget {
@@ -17,7 +18,10 @@ class _HospitalHistoryState extends State<HospitalHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFFFF1E6),
       appBar: AppBar(
+        elevation: 0,
+        automaticallyImplyLeading: false,
         backgroundColor: Color(0xFFFFF1E6),
         title: const Text(
           'MEDICATOR',
@@ -35,7 +39,7 @@ class _HospitalHistoryState extends State<HospitalHistory> {
             onPressed: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => HospitalHistory())),
             child: const Text(
-              'My History',
+              'History',
               style: TextStyle(color: Colors.black),
             ),
           ),
@@ -60,9 +64,7 @@ class _HospitalHistoryState extends State<HospitalHistory> {
       ),
       body: Container(
         child: FutureBuilder(
-          future: http.post(
-              Uri.parse(
-                  "http://5f9b-2405-201-4022-e94c-d95-5757-635-a66d.ngrok.io/backend/history"),
+          future: http.post(Uri.parse(API + "/backend/history"),
               headers: <String, String>{
                 'Content-Type': 'application/json; charset=UTF-8',
               },
@@ -73,6 +75,8 @@ class _HospitalHistoryState extends State<HospitalHistory> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data != null) {
+                print(snapshot.data);
+                print(snapshot.data.body);
                 dynamic data = jsonDecode(snapshot.data.body);
                 print(data);
                 return ListView.builder(

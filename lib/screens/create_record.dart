@@ -25,7 +25,9 @@ class _CreateRecordScreenState extends State<CreateRecordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFFFF1E6),
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: const Color(0xFFFFF1E6),
         title: const Text(
           'MEDICATOR',
@@ -67,12 +69,17 @@ class _CreateRecordScreenState extends State<CreateRecordScreen> {
         ],
       ),
       body: Container(
+        margin: EdgeInsets.symmetric(horizontal: 25),
         child: Form(
           key: _formKey,
           child: Column(
             children: [
+              SizedBox(
+                height: 40,
+              ),
               Container(
-                padding: const EdgeInsets.all(5),
+                color: Color(0xFFFFF1E6),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 height: 60,
                 child: TextFormField(
                   keyboardType: TextInputType.name,
@@ -99,15 +106,17 @@ class _CreateRecordScreenState extends State<CreateRecordScreen> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(5),
+                color: Color(0xFFFFF1E6),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 height: 60,
                 child: TextFormField(
                   keyboardType: TextInputType.name,
                   maxLines: 1,
                   decoration: textInputDecoration.copyWith(
+                    fillColor: Color(0xFFFFF1E6),
                     hintText: 'Manufacturing Date',
                     hintStyle: const TextStyle(
-                      color: Color(0xFF9E9E9E),
+                      color: Colors.black,
                       fontSize: 15,
                     ),
                   ),
@@ -126,15 +135,17 @@ class _CreateRecordScreenState extends State<CreateRecordScreen> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(5),
+                color: Color(0xFFFFF1E6),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 height: 60,
                 child: TextFormField(
                   keyboardType: TextInputType.name,
                   maxLines: 1,
                   decoration: textInputDecoration.copyWith(
+                    fillColor: Color(0xFFFFF1E6),
                     hintText: 'Expiry Date',
                     hintStyle: const TextStyle(
-                      color: Color(0xFF9E9E9E),
+                      color: Colors.black,
                       fontSize: 15,
                     ),
                   ),
@@ -153,15 +164,17 @@ class _CreateRecordScreenState extends State<CreateRecordScreen> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(5),
+                color: Color(0xFFFFF1E6),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 height: 60,
                 child: TextFormField(
                   keyboardType: TextInputType.name,
                   maxLines: 1,
                   decoration: textInputDecoration.copyWith(
+                    fillColor: Color(0xFFFFF1E6),
                     hintText: 'MRP',
                     hintStyle: const TextStyle(
-                      color: Color(0xFF9E9E9E),
+                      color: Colors.black,
                       fontSize: 15,
                     ),
                   ),
@@ -180,15 +193,16 @@ class _CreateRecordScreenState extends State<CreateRecordScreen> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 height: 60,
                 child: TextFormField(
                   keyboardType: TextInputType.name,
                   maxLines: 1,
                   decoration: textInputDecoration.copyWith(
+                    fillColor: Color(0xFFFFF1E6),
                     hintText: 'Private Key',
                     hintStyle: const TextStyle(
-                      color: Color(0xFF9E9E9E),
+                      color: Colors.black,
                       fontSize: 15,
                     ),
                   ),
@@ -213,20 +227,20 @@ class _CreateRecordScreenState extends State<CreateRecordScreen> {
                   onPressed: () async {
                     print('PRESSED');
                     if (_formKey.currentState!.validate()) {
-                      final response = await http.post(
-                          Uri.parse(
-                              "http://5f9b-2405-201-4022-e94c-d95-5757-635-a66d.ngrok.io/backend/vaccreate"),
-                          headers: <String, String>{
-                            'Content-Type': 'application/json; charset=UTF-8',
-                          },
-                          body: jsonEncode(<String, String>{
-                            'name': vaccineName,
-                            'mrp': mrp,
-                            'date': mfc,
-                            'expiry': exp,
-                            'private_key': privateKey,
-                            'uid': FirebaseAuth.instance.currentUser!.uid,
-                          }));
+                      final response =
+                          await http.post(Uri.parse(API + "/backend/vaccreate"),
+                              headers: <String, String>{
+                                'Content-Type':
+                                    'application/json; charset=UTF-8',
+                              },
+                              body: jsonEncode(<String, String>{
+                                'name': vaccineName,
+                                'mrp': mrp,
+                                'date': mfc,
+                                'expiry': exp,
+                                'private_key': privateKey,
+                                'uid': FirebaseAuth.instance.currentUser!.uid,
+                              }));
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Added a medicine record!"),
                         behavior: SnackBarBehavior.floating,

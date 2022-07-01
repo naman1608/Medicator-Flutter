@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:funny_papers/screens/know_your_vaccine.dart';
+import 'package:funny_papers/shared/constants.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -42,9 +43,7 @@ class _QRScanState extends State<QRScan> {
       controller!.stopCamera();
       print('RESULT');
       print(result!.code);
-      final response = await http.post(
-          Uri.parse(
-              "http://5f9b-2405-201-4022-e94c-d95-5757-635-a66d.ngrok.io/backend/public"),
+      final response = await http.post(Uri.parse(API + "/backend/public"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -52,6 +51,10 @@ class _QRScanState extends State<QRScan> {
             'product_id': result!.code!,
           }));
       List<dynamic> data = jsonDecode(response.body);
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => KnowYourVaccine(data: data)));
+      print('DATA');
+      print(data);
       controller!.dispose();
     }
   }

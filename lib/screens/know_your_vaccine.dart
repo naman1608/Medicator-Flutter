@@ -24,6 +24,7 @@ class _KnowYourVaccineState extends State<KnowYourVaccine> {
 
   @override
   Widget build(BuildContext context) {
+    print(data.runtimeType);
     return Scaffold(
       backgroundColor: Color(0xFFFFF1E6),
       appBar: AppBar(
@@ -177,9 +178,35 @@ class _KnowYourVaccineState extends State<KnowYourVaccine> {
               child: ListView.builder(
                 itemCount: data.length,
                 itemBuilder: ((context, index) {
-                  return ListTile(
-                    title: data[index]['name'],
-                    subtitle: data[index]['role'],
+                  return Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color(0xFFFFF1E6),
+                    ),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 16),
+                    padding: EdgeInsets.all(8),
+                    child: ListTile(
+                      title: Text(
+                        data[index]['name'],
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      subtitle: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Text(
+                              data[index]['role'],
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                          Text(data[index]['date']),
+                        ],
+                      ),
+                    ),
                   );
                 }),
               ),

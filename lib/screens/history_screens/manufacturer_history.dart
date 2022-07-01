@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:funny_papers/main.dart';
 import 'package:funny_papers/models/medicine.dart';
+import 'package:funny_papers/shared/constants.dart';
 import 'package:http/http.dart' as http;
 
 class ManufacturerHistory extends StatefulWidget {
@@ -60,9 +61,7 @@ class _ManufacturerHistoryState extends State<ManufacturerHistory> {
       ),
       body: Container(
         child: FutureBuilder(
-          future: http.post(
-              Uri.parse(
-                  "http://5f9b-2405-201-4022-e94c-d95-5757-635-a66d.ngrok.io/backend/history"),
+          future: http.post(Uri.parse(API + "/backend/history"),
               headers: <String, String>{
                 'Content-Type': 'application/json; charset=UTF-8',
               },

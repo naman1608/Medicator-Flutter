@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:funny_papers/main.dart';
+import 'package:funny_papers/screens/create_record.dart';
 import 'package:funny_papers/screens/history_screens/manufacturer_history.dart';
+import 'package:funny_papers/shared/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
@@ -21,6 +23,7 @@ class _ManufacturerDashboardState extends State<ManufacturerDashboard> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFF1E6),
       appBar: AppBar(
+        elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: const Color(0xFFFFF1E6),
         title: const Text(
@@ -29,7 +32,10 @@ class _ManufacturerDashboardState extends State<ManufacturerDashboard> {
         ),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: ((context) => CreateRecordScreen()))),
             child: const Text(
               'Create Record',
               style: TextStyle(color: Colors.black),
@@ -63,19 +69,20 @@ class _ManufacturerDashboardState extends State<ManufacturerDashboard> {
         ],
       ),
       body: FutureBuilder(
-        future: http.post(
-            Uri.parse(
-                "http://5f9b-2405-201-4022-e94c-d95-5757-635-a66d.ngrok.io/backend/getprofilemanu"),
+        future: http.post(Uri.parse(API + "/backend/getprofilemanu"),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
             body: jsonEncode(<String, String>{
               "uid": FirebaseAuth.instance.currentUser!.uid
             })),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<Response> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data != null) {
-              dynamic data = jsonDecode(snapshot.data.body);
+              print(snapshot.data!.body);
+              print(snapshot.data!.statusCode);
+              print(FirebaseAuth.instance.currentUser!.uid);
+              dynamic data = jsonDecode(snapshot.data!.body);
               manufacturerName = data[0]['name'];
               return Container(
                 width: double.infinity,

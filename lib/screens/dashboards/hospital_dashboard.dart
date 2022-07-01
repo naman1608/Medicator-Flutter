@@ -4,7 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:funny_papers/main.dart';
 import 'package:funny_papers/screens/history_screens/hospital_history.dart';
+import 'package:funny_papers/shared/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class HospitalDashboard extends StatefulWidget {
   const HospitalDashboard({Key? key}) : super(key: key);
@@ -18,65 +20,75 @@ class _HospitalDashboardState extends State<HospitalDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFFFF1E6),
       appBar: AppBar(
+        elevation: 0,
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFFFF1E6),
         title: const Text(
           'MEDICATOR',
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          TextButton(
-            onPressed: () {},
-            child: const Text(
-              'Scan Product',
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
           Container(
-            color: Colors.white,
+            padding: EdgeInsets.all(0),
             child: TextButton(
-              onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HospitalHistory())),
+              onPressed: () {},
               child: const Text(
-                'My History',
+                'Scan Product',
                 style: TextStyle(color: Colors.black),
               ),
             ),
           ),
-          TextButton(
-            onPressed: () async {
-              try {
-                await FirebaseAuth.instance.signOut().then((value) =>
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => MyApp()),
-                        (route) => false));
-              } catch (e) {
-                print(e.toString());
-                return null;
-              }
-            },
-            child: const Text(
-              'Logout',
-              style: TextStyle(color: Colors.black),
+          Container(
+            padding: EdgeInsets.all(0),
+            child: TextButton(
+              style: ButtonStyle(
+                  padding: MaterialStateProperty.all(EdgeInsets.zero)),
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HospitalHistory())),
+              child: const Text(
+                'History',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(0),
+            child: TextButton(
+              onPressed: () async {
+                try {
+                  await FirebaseAuth.instance.signOut().then((value) =>
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => MyApp()),
+                          (route) => false));
+                } catch (e) {
+                  print(e.toString());
+                  return null;
+                }
+              },
+              child: const Text(
+                'Logout',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
           ),
         ],
       ),
       body: FutureBuilder(
-        future: http.post(
-            Uri.parse(
-                "http://5f9b-2405-201-4022-e94c-d95-5757-635-a66d.ngrok.io/backend/getprofilehosp"),
+        future: http.post(Uri.parse(API + "/backend/getprofilehosp"),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
             body: jsonEncode(<String, String>{
               "uid": FirebaseAuth.instance.currentUser!.uid
             })),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<Response> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data != null) {
-              dynamic data = jsonDecode(snapshot.data.body);
+              print(snapshot.data);
+              print(snapshot.data!.body);
+              dynamic data = jsonDecode(snapshot.data!.body);
               hospitalName = data[0]['name'];
               return Container(
                 width: double.infinity,
@@ -85,7 +97,7 @@ class _HospitalDashboardState extends State<HospitalDashboard> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(
-                      height: 30,
+                      height: 50,
                     ),
                     Text(
                       'Welcome ' + hospitalName,
